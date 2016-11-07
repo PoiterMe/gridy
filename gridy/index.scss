@@ -1,23 +1,27 @@
+// $GRID_TILES - 100%/$GRID_TILES
 $GRID_TILES: 12;
+
+// $GRID_ITEM_SELECTOR_PREFIX - prefix of the grid item selector, final selector is a combination out of the $GRID_ITEM_SELECTOR_PREFIX and the defined name for a grid-item
 $GRID_ITEM_SELECTOR_PREFIX: "tile";
+
+// $GRID_WRAPPPER_SELECTOR - selector of the wrapping container
 $GRID_WRAPPPER_SELECTOR: ".row";
 
+// $GRID_SPACING - spacing for ur items
 $GRID_SPACING: .5em;
+
+// $GRID_UNIT - choose a which unit u wanna use
 $GRID_UNIT: "px";
 
 /*
-  0 <-> $GRID_BREAKPOINTS[1]+$GRID_UNIT
-  $GRID_BREAKPOINTS[1]+$GRID_UNIT <-> $GRID_BREAKPOINTS[2]+$GRID_UNIT
-  [..]
-  $GRID_BREAKPOINTS[x-1]+$GRID_UNIT <-> $GRID_BREAKPOINTS[x]+$GRID_UNIT
-  $GRID_BREAKPOINTS[x]+$GRID_UNIT <-> (∞)
-
+  $GRID_BREAKPOINTS is a list with a variable number of values, each represent a breakpoint
   @example
   --------------------
   $GRID_BREAKPOINTS : (400, 1170);
   generated breakpoints :  0-400; 400-1170; 1170-(∞)
-  $GRID_BREAKPOINTS : (400, 700, 1170);
-  generated breakpoints :  0-400; 400-700; 700-1170; 1170-(∞)
+
+  $GRID_BREAKPOINTS : (544, 768, 992, 1200);
+  generated breakpoints :  0-544; 544-768; 768-992; 992-1200 1200-(∞)
 */
 $GRID_BREAKPOINTS: (544, 768, 992, 1200);
 
