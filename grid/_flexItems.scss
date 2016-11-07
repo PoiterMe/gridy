@@ -1,0 +1,83 @@
+
+@mixin generateGridItems() {
+  $_GRID_BREAKPOINTS_LENGTH: length($GRID_BREAKPOINTS);
+  $_GRID_ITEMS_LENGTH: length($GRID_ITEMS);
+  $_BREAKS_LIST: ();
+  $BP_standard: ();
+  $selectorPrefix: '';
+
+  @if $GRID_ITEM_SELECTOR_PREFIX and $GRID_ITEM_SELECTOR_PREFIX != '' {
+    $selectorPrefix: $GRID_ITEM_SELECTOR_PREFIX+'_';
+  } @else {
+    $selectorPrefix: '.w_';
+  }
+
+  @if $_GRID_BREAKPOINTS_LENGTH > 1 {
+    @for $i from 1 through $_GRID_BREAKPOINTS_LENGTH {
+      $c: nth($GRID_BREAKPOINTS, $i);
+
+      @if $i == 1 {
+        $next: nth($GRID_BREAKPOINTS, $i + 1);
+        $query: "(max-width: #{$c}#{$GRID_UNIT})";
+        $nextQuery: "(min-width: #{$c}#{$GRID_UNIT}) and (max-width: #{$next}#{$GRID_UNIT})";
+        $_BREAKS_LIST: append($_BREAKS_LIST, ($query, ()));
+        $_BREAKS_LIST: append($_BREAKS_LIST, ($nextQuery, ()));
+      } @else if $i > 1 and $i < $_GRID_BREAKPOINTS_LENGTH {
+        $next: nth($GRID_BREAKPOINTS, $i + 1);
+        $nextQuery: "(min-width: #{$c}#{$GRID_UNIT}) and (max-width: #{$next}#{$GRID_UNIT})";
+        $_BREAKS_LIST: append($_BREAKS_LIST, ($nextQuery, ()));
+      } @else if $i == $_GRID_BREAKPOINTS_LENGTH {
+        $query: "(min-width: #{$c}#{$GRID_UNIT})";
+        $_BREAKS_LIST: append($_BREAKS_LIST, ($query, ()));
+      }
+    }
+  } @else {
+    @error 'define at least 2 breakpoints'
+  }
+
+  @if $_GRID_ITEMS_LENGTH >= 1 {
+    @for $itemIndex from 1 through $_GRID_ITEMS_LENGTH {
+      $gridItem: nth($GRID_ITEMS, $itemIndex);
+      $gridItemLength: length($gridItem);
+      $lastGridItemIndex: nth($gridItem, $gridItemLength);
+      $selector: '';
+      @if type_of($lastGridItemIndex) == string {
+        $selector: "."+$selectorPrefix+$lastGridItemIndex;
+        $gridItem: remove($gridItem, $gridItemLength);
+      } @else {
+        $selector: "."+$selectorPrefix+selectorString($gridItem);
+      }
+      $gridItemLength: length($gridItem);
+      @if $gridItemLength == length($_BREAKS_LIST) {
+        @for $x from 1 through $gridItemLength {
+          $width: nth($gridItem, $x);
+          $break: nth($_BREAKS_LIST, $x);
+          $breakSelectors: nth($break, 2);
+          $replaceBreak: (nth($break, 1), append($breakSelectors, ($selector, $width)));
+          $_BREAKS_LIST: replace($_BREAKS_LIST, $replaceBreak, $x);
+        }
+      } @else {
+        $BP_standard: append($BP_standard, ($selector, nth($gridItem, 1)))
+      }
+    }
+  } @else {
+    @error 'define at least 1 item'
+  }
+
+  @each $key in $BP_standard {
+    #{nth($key, 1)} {
+      width: percentage(nth($key, 2));
+    }
+  }
+  @each $key in $_BREAKS_LIST {
+    $query: nth($key, 1);
+    $selectorList: nth($key, 2);
+    @media #{$query} {
+      @each $item in $selectorList {
+        #{nth($item, 1)} {
+          width: percentage(nth($item, 2));
+        }
+      }
+    }
+  }
+}

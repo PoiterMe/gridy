@@ -1,0 +1,48 @@
+$GRID_TILES: 12;
+$GRID_ITEM_SELECTOR_PREFIX: "tile";
+$GRID_WRAPPPER_SELECTOR: ".row";
+
+$GRID_SPACING: .5em;
+$GRID_UNIT: "px";
+
+/*
+  0 <-> $GRID_BREAKPOINTS[1]+$GRID_UNIT
+  $GRID_BREAKPOINTS[1]+$GRID_UNIT <-> $GRID_BREAKPOINTS[2]+$GRID_UNIT
+  [..]
+  $GRID_BREAKPOINTS[x-1]+$GRID_UNIT <-> $GRID_BREAKPOINTS[x]+$GRID_UNIT
+  $GRID_BREAKPOINTS[x]+$GRID_UNIT <-> (∞)
+
+  @example
+  --------------------
+  $GRID_BREAKPOINTS : (400, 1170);
+  generated breakpoints :  0-400; 400-1170; 1170-(∞)
+  $GRID_BREAKPOINTS : (400, 700, 1170);
+  generated breakpoints :  0-400; 400-700; 700-1170; 1170-(∞)
+*/
+$GRID_BREAKPOINTS: (544, 768, 992, 1200);
+
+$GRID_ITEMS: (
+                ($GRID_TILES, full),
+                (12, 5, 4, 3, 3, sidebar),
+                (12, 7, 8, 9, 9, content),
+                (12, 12, 6, 6, 3, content-standard),
+                ($GRID_TILES, $GRID_TILES/2, $GRID_TILES/2, $GRID_TILES/4, $GRID_TILES/6, standard)
+);
+@mixin GRID_ROW_STYLES {
+
+}
+
+@mixin GRID_TILE_STYLES {
+
+}
+
+@mixin GRID_TILE_INNER_STYLES {
+  background: #eee;
+
+}
+
+@import "flexFunctions";
+@import "flexQueryMixin";
+@import "flexGrid";
+
+

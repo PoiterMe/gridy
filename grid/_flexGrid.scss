@@ -1,0 +1,52 @@
+@import "flexItems";
+@import "flexStyles_atomic";
+
+%spacingBottom{
+  margin-bottom: ($GRID_SPACING*2);
+}
+
+@mixin grid_render() {
+  #{$GRID_WRAPPPER_SELECTOR}{
+
+    .bottomSpace{
+      @extend %spacingBottom;
+    }
+
+    &:after {
+      content: ".";
+      clear: both;
+      display: block;
+      visibility: hidden;
+      height: 0px;
+    }
+    &, & * {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    @include grid_atomicFlexStyle();
+    @include GRID_ROW_STYLES();
+
+    [class^="#{$GRID_ITEM_SELECTOR_PREFIX}"] {
+      float: left;
+      display: flex;
+      align-items: stretch;
+      flex-grow: 1;
+      padding: $GRID_SPACING;
+      @include GRID_TILE_STYLES();
+      .inner {
+        width: 100%;
+        padding: $GRID_SPACING;
+        @include GRID_TILE_INNER_STYLES();
+      }
+    }
+    @include generateGridItems();
+  }
+}
+
+@include grid_render();

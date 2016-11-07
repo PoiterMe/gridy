@@ -1,0 +1,62 @@
+@function percentage($part) {
+  @return unquote((100 / $GRID_TILES * $part) + "%");
+}
+
+@function remove($list, $index) {
+  $result: ();
+  @for $i from 1 through length($list) {
+    @if $i != $index {
+      $result: append($result, nth($list, $i), 'comma');
+    }
+  }
+  @return $result;
+}
+
+@function selectorString($list) {
+  $result: '';
+  @for $i from 1 through length($list) {
+    $string: nth($list, $i);
+    $result: $result + $string;
+    @if $i != length($list) {
+      $result: $result + '-';
+    }
+  }
+  @return $result;
+}
+
+@function replace($list, $value, $index) {
+  $result: ();
+  @for $i from 1 through length($list) {
+    @if ($index == $i) {
+      $result: append($result, $value);
+    } @else {
+      $result: append($result, nth($list, $i));
+    }
+  }
+  @return $result;
+}
+
+@function grid_createQueries($GRID_BREAKPOINTS) {
+  $_BREAKS_LIST: ();
+  $_GRID_BREAKPOINTS_LENGTH: length($GRID_BREAKPOINTS);
+  @if $_GRID_BREAKPOINTS_LENGTH > 1 {
+    @for $i from 1 through $_GRID_BREAKPOINTS_LENGTH {
+      $c: nth($GRID_BREAKPOINTS, $i);
+      @if $i == 1 {
+        $next: nth($GRID_BREAKPOINTS, $i + 1);
+        $query: "(max-width: #{$c}#{$GRID_UNIT})";
+        $nextQuery: "(min-width: #{$c}#{$GRID_UNIT}) and (max-width: #{$next}#{$GRID_UNIT})";
+        $_BREAKS_LIST: append($_BREAKS_LIST, $query);
+        $_BREAKS_LIST: append($_BREAKS_LIST, $nextQuery);
+      } @else if $i > 1 and $i < $_GRID_BREAKPOINTS_LENGTH {
+        $next: nth($GRID_BREAKPOINTS, $i + 1);
+        $nextQuery: "(min-width: #{$c}#{$GRID_UNIT}) and (max-width: #{$next}#{$GRID_UNIT})";
+        $_BREAKS_LIST: append($_BREAKS_LIST, $nextQuery);
+      } @else if $i == $_GRID_BREAKPOINTS_LENGTH {
+        $query: "(min-width: #{$c}#{$GRID_UNIT})";
+        $_BREAKS_LIST: append($_BREAKS_LIST, $query);
+      }
+    }
+  }
+  @return $_BREAKS_LIST;
+}

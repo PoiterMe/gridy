@@ -1,0 +1,7 @@
+$GRID_QUERIES : grid_createQueries($GRID_BREAKPOINTS);
+@mixin grid_query($index){
+  $query : nth($GRID_QUERIES, $index);
+  @media #{$query} {
+    @content;
+  }
+}
