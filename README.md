@@ -1,5 +1,6 @@
 # gridy
-SCSS bundle for building a minimal flexible Grid
+SCSS bundle for building a minimal flexible Grid. Not like "Bootstrap" and other frameworks it will deliver a minimum of functionality. 
+Define the Grid once and later on u can easily extend it. 
 
 1) after downloading, move to the file "gridy/index.scss" and edit this config file to fit ur needs
 ```scss
@@ -68,6 +69,104 @@ This will break like u defined in ur gridy/index.scss
     </div>
 </div>
 ```
+
+
+**the result:**
+```css
+.row .bottomSpace {
+  margin-bottom: 1em; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; }
+  .row:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px; }
+  .row, .row * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; }
+  .row.d_row {
+    flex-direction: row; }
+  .row.d_row-reverse {
+    flex-direction: row-reverse; }
+  .row.d_column {
+    flex-direction: column; }
+  .row.d_column-reverse {
+    flex-direction: column-reverse; }
+  .row.fW_nowrap {
+    flex-wrap: nowrap; }
+  .row.fW_wrap {
+    flex-wrap: wrap; }
+  .row.fW_wrap-reverse {
+    flex-wrap: wrap-reverse; }
+  .row.jC_flex-start {
+    justify-content: flex-start; }
+  .row.jC_flex-end {
+    justify-content: flex-end; }
+  .row.jC_center {
+    justify-content: center; }
+  .row.jC_space-between {
+    justify-content: space-between; }
+  .row.jC_space-around {
+    justify-content: space-around; }
+  .row.aI_flex-start {
+    align-items: flex-start; }
+  .row.aI_flex-end {
+    align-items: flex-end; }
+  .row.aI_center {
+    align-items: center; }
+  .row.aI_baseline {
+    align-items: baseline; }
+  .row.aI_stretch {
+    align-items: stretch; }
+  .row.aC_flex-start {
+    align-content: flex-start; }
+  .row.aC_flex-end {
+    align-content: flex-end; }
+  .row.aC_center {
+    align-content: center; }
+  .row.aC_space-between {
+    align-content: space-between; }
+  .row.aC_space-around {
+    align-content: space-around; }
+  .row.aC_stretch {
+    align-content: stretch; }
+  .row [class^="tile"] {
+    float: left;
+    display: flex;
+    align-items: stretch;
+    flex-grow: 1;
+    padding: 0.5em; }
+    .row [class^="tile"] .inner {
+      width: 100%;
+      padding: 0.5em;
+      background: #eee; }
+  .row .tile_full {
+    width: 100%; }
+  @media (max-width: 544px) {
+    .row .tile_standard {
+      width: 100%; } }
+  @media (min-width: 544px) and (max-width: 768px) {
+    .row .tile_standard {
+      width: 50%; } }
+  @media (min-width: 768px) and (max-width: 992px) {
+    .row .tile_standard {
+      width: 50%; } }
+  @media (min-width: 992px) and (max-width: 1200px) {
+    .row .tile_standard {
+      width: 25%; } }
+  @media (min-width: 1200px) {
+    .row .tile_standard {
+      width: 16.66667%; } }
+
+/*# sourceMappingURL=bundle.css.map */
+```
+
 
 
 
