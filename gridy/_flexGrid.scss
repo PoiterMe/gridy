@@ -1,52 +1,45 @@
 @import "flexItems";
 @import "flexStyles_atomic";
-
-%spacingBottom{
-  margin-bottom: ($GRID_SPACING*2);
-}
-
-@mixin grid_render() {
-  #{$GRID_WRAPPPER_SELECTOR}{
-
-    .bottomSpace{
-      @extend %spacingBottom;
-    }
-
-    &:after {
-      content: ".";
-      clear: both;
-      display: block;
-      visibility: hidden;
-      height: 0px;
-    }
-    &, & * {
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-    }
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-
-    @include grid_atomicFlexStyle();
-    @include GRID_ROW_STYLES();
-
-    [class^="#{$GRID_ITEM_SELECTOR_PREFIX}"] {
-      float: left;
-      display: flex;
-      align-items: stretch;
-      flex-grow: 1;
-      padding: $GRID_SPACING;
-      @include GRID_TILE_STYLES();
-      .inner {
-        width: 100%;
-        padding: $GRID_SPACING;
-        @include GRID_TILE_INNER_STYLES();
-      }
-    }
-    @include generateGridItems();
+@debug str-slice($GRID_ITEM_SELECTOR, 2);
+$GRID_ITEM_SELECTOR_CLASSNAME : str-slice($GRID_ITEM_SELECTOR, 2);
+#{$GRID_CONTAINER_SELECTOR} {
+  width: 100%;
+  padding-right: $GRID_SPACING;
+  padding-left: $GRID_SPACING;
+  margin-right: auto;
+  margin-left: auto;
+  &, & * {
+    box-sizing: border-box;
   }
 }
+#{$GRID_WRAPPPER_SELECTOR}{
+  margin-left: -$GRID_SPACING;
+  margin-right: -$GRID_SPACING;
+  .bottomSpace{
+    margin-bottom: ($GRID_SPACING*2);
+  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  @include GRID_ROW_STYLES();
+}
+#{$GRID_ITEM_SELECTOR}{
+  flex-grow: 1;
+  max-width: 100%;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+}
 
-@include grid_render();
+[class*="#{$GRID_ITEM_SELECTOR_CLASSNAME +'_'}"] {
+  &:not(.no_grow){
+    flex-grow: 1;
+  }
+}
+[class*="#{$GRID_ITEM_SELECTOR_CLASSNAME +'_'}"], #{$GRID_ITEM_SELECTOR} {
+  padding: $GRID_SPACING;
+  @include GRID_TILE_STYLES();
+}
+@include generateGridItems();
+@include grid_atomicFlexStyle();

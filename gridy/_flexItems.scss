@@ -1,13 +1,13 @@
-
 @mixin generateGridItems() {
+  $GRID_ITEM_SELECTOR_CLASSNAME : str-slice($GRID_ITEM_SELECTOR, 2);
   $_GRID_BREAKPOINTS_LENGTH: length($GRID_BREAKPOINTS);
   $_GRID_ITEMS_LENGTH: length($GRID_ITEMS);
   $_BREAKS_LIST: ();
   $BP_standard: ();
   $selectorPrefix: '';
 
-  @if $GRID_ITEM_SELECTOR_PREFIX and $GRID_ITEM_SELECTOR_PREFIX != '' {
-    $selectorPrefix: $GRID_ITEM_SELECTOR_PREFIX+'_';
+  @if $GRID_ITEM_SELECTOR_CLASSNAME and $GRID_ITEM_SELECTOR_CLASSNAME != '' {
+    $selectorPrefix: $GRID_ITEM_SELECTOR_CLASSNAME+'_';
   } @else {
     $selectorPrefix: '.w_';
   }

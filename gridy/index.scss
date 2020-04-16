@@ -1,16 +1,19 @@
 // $GRID_TILES - 100%/$GRID_TILES
 $GRID_TILES: 12;
 
-// $GRID_ITEM_SELECTOR_PREFIX - prefix of the grid item selector, final selector is a combination out of the $GRID_ITEM_SELECTOR_PREFIX and the defined name for a grid-item
-$GRID_ITEM_SELECTOR_PREFIX: "tile";
+// $GRID_CONTAINER_SELECTOR - grid container selector
+$GRID_CONTAINER_SELECTOR: ".container";
+
+// $GRID_ITEM_SELECTOR - grid item selector
+$GRID_ITEM_SELECTOR: ".col";
 
 // $GRID_WRAPPPER_SELECTOR - selector of the wrapping container
 $GRID_WRAPPPER_SELECTOR: ".row";
 
 // $GRID_SPACING - spacing for ur items
-$GRID_SPACING: .5em;
+$GRID_SPACING: 1rem;
 
-// $GRID_UNIT - choose a which unit u wanna use
+// $GRID_UNIT - choose a which unit you want to use
 $GRID_UNIT: "px";
 
 /*
@@ -27,26 +30,25 @@ $GRID_BREAKPOINTS: (544, 768, 992, 1200);
 
 $GRID_ITEMS: (
                 ($GRID_TILES, full),
-                (12, 5, 4, 3, 3, sidebar),
+                (6, half),
+                (6, 4, 4, 4, 4, gal),
+                (6, 6, 4, 4, 4, card),
+                (12, 5, 4, 3, 3, side),
                 (12, 7, 8, 9, 9, content),
-                (12, 12, 6, 6, 3, content-standard),
-                ($GRID_TILES, $GRID_TILES/2, $GRID_TILES/2, $GRID_TILES/4, $GRID_TILES/6, standard)
+                (12, 12, 6, 6, 6, footer)
 );
 @mixin GRID_ROW_STYLES {
-
 }
 
 @mixin GRID_TILE_STYLES {
-
+  box-shadow: 0 0 0 1px black inset;
 }
 
 @mixin GRID_TILE_INNER_STYLES {
-  background: #eee;
-
 }
 
-@import "flexFunctions";
-@import "flexQueryMixin";
-@import "flexGrid";
+@import "../gridy/flexFunctions";
+@import "../gridy/flexQueryMixin";
+@import "../gridy/_flexGrid";
 
 

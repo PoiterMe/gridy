@@ -1,0 +1,25 @@
+{
+  "name": "gridy",
+  "version": "1.0.0",
+  "description": "SCSS bundle for building a minimal flexible Grid. Not like \"Bootstrap\" and other frameworks gridy delivers a minimum of functionality. Define what you need easy and fast.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node-sass test/style.scss test/style.css --source-map-embed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PoiterMe/gridy.git"
+  },
+  "author": "Peter Meier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PoiterMe/gridy/issues"
+  },
+  "homepage": "https://github.com/PoiterMe/gridy#readme",
+  "dependencies": {
+    "node-sass": "^4.13.1"
+  }
+}

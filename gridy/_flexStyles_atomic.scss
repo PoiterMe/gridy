@@ -1,109 +1,136 @@
 @mixin grid_atomicFlexStyle() {
-  // d for flex-direction: row | row-reverse | column | column-reverse;
-  &.d {
-    // row (default): left to right in ltr; right to left in rtl
-    &_row {
-      flex-direction: row;
+  #{$GRID_WRAPPPER_SELECTOR}{
+    .no-gutters {
+      margin-right: 0;
+      margin-left: 0;
     }
-    // row-reverse: right to left in ltr; left to right in rtl
-    &_row-reverse {
-      flex-direction: row-reverse;
+    // d for flex-direction: row | row-reverse | column | column-reverse;
+    &.flex-direction {
+      // row (default): left to right in ltr; right to left in rtl
+      &_row {
+        flex-direction: row;
+      }
+      // row-reverse: right to left in ltr; left to right in rtl
+      &_row-reverse {
+        flex-direction: row-reverse;
+      }
+      // column: same as row but top to bottom
+      &_column {
+        flex-direction: column;
+      }
+      // column-reverse: same as row-reverse but bottom to top
+      &_column-reverse {
+        flex-direction: column-reverse;
+      }
     }
-    // column: same as row but top to bottom
-    &_column {
-      flex-direction: column;
+    // fW for flex-wrap: nowrap | wrap | wrap-reverse;
+    &.flex-wrap {
+      // nowrap (default): single-line / left to right in ltr; right to left in rtl
+      &_nowrap {
+        flex-wrap: nowrap;
+      }
+      // wrap: multi-line / left to right in ltr; right to left in rtl
+      &_wrap {
+        flex-wrap: wrap;
+      }
+      // wrap-reverse: multi-line / right to left in ltr; left to right in rtl
+      &_wrap-reverse {
+        flex-wrap: wrap-reverse;
+      }
     }
-    // column-reverse: same as row-reverse but bottom to top
-    &_column-reverse {
-      flex-direction: column-reverse;
+    //  jC for justify-content: flex-start | flex-end | center | space-between | space-around;
+    &.justify-content {
+      // flex-start (default): items are packed toward the start line
+      &_flex-start {
+        justify-content: flex-start;
+      }
+      // flex-end: items are packed toward to end line
+      &_flex-end {
+        justify-content: flex-end;
+      }
+      // center: items are centered along the line
+      &_center {
+        justify-content: center;
+      }
+      // space-between: items are evenly distributed in the line; first item is on the start line, last item on the end line
+      &_space-between {
+        justify-content: space-between;
+      }
+      // space-around: items are evenly distributed in the line with equal space around them. Note that visually the spaces aren't equal, since all the items have equal space on both sides. The first item will have one unit of space against the container edge, but two units of space between the next item because that next item has it's own spacing that applies.
+      &_space-around {
+        justify-content: space-around;
+      }
+    }
+    // aI for align-items: flex-start | flex-end | center | baseline | stretch;
+    &.align-items {
+      // flex-start: cross-start margin edge of the items is placed on the cross-start line
+      &_flex-start {
+        align-items: flex-start;
+      }
+      // flex-end: cross-end margin edge of the items is placed on the cross-end line
+      &_flex-end {
+        align-items: flex-end;
+      }
+      // center: items are centered in the cross-axis
+      &_center {
+        align-items: center;
+      }
+      // baseline: items are aligned such as their baselines align
+      &_baseline {
+        align-items: baseline;
+      }
+      // stretch (default): stretch to fill the container (still respect min-width/max-width)
+      &_stretch {
+        align-items: stretch;
+      }
+    }
+    // aC for align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+    &.align-content {
+      // flex-start: lines packed to the start of the container
+      &_flex-start {
+        align-content: flex-start;
+      }
+      // flex-end: lines packed to the end of the container
+      &_flex-end {
+        align-content: flex-end;
+      }
+      // center: lines packed to the center of the container
+      &_center {
+        align-content: center;
+      }
+      // space-between: lines evenly distributed; the first line is at the start of the container while the last one is at the end
+      &_space-between {
+        align-content: space-between;
+      }
+      // space-around: lines evenly distributed with equal space around each line
+      &_space-around {
+        align-content: space-around;
+      }
+      // stretch (default): lines stretch to take up the remaining space
+      &_stretch {
+        align-content: stretch;
+      }
     }
   }
-  // fW for flex-wrap: nowrap | wrap | wrap-reverse;
-  &.fW {
-    // nowrap (default): single-line / left to right in ltr; right to left in rtl
-    &_nowrap {
-      flex-wrap: nowrap;
-    }
-    // wrap: multi-line / left to right in ltr; right to left in rtl
-    &_wrap {
-      flex-wrap: wrap;
-    }
-    // wrap-reverse: multi-line / right to left in ltr; left to right in rtl
-    &_wrap-reverse {
-      flex-wrap: wrap-reverse;
+
+  .no-gutters {
+    [class*="#{$GRID_ITEM_SELECTOR_CLASSNAME +'_'}"], #{$GRID_ITEM_SELECTOR} {
+      padding-right: 0;
+      padding-left: 0;
     }
   }
-  //  jC for justify-content: flex-start | flex-end | center | space-between | space-around;
-  &.jC {
-    // flex-start (default): items are packed toward the start line
-    &_flex-start {
-      justify-content: flex-start;
-    }
-    // flex-end: items are packed toward to end line
-    &_flex-end {
-      justify-content: flex-end;
-    }
-    // center: items are centered along the line
-    &_center {
-      justify-content: center;
-    }
-    // space-between: items are evenly distributed in the line; first item is on the start line, last item on the end line
-    &_space-between {
-      justify-content: space-between;
-    }
-    // space-around: items are evenly distributed in the line with equal space around them. Note that visually the spaces aren't equal, since all the items have equal space on both sides. The first item will have one unit of space against the container edge, but two units of space between the next item because that next item has it's own spacing that applies.
-    &_space-around {
-      justify-content: space-around;
-    }
-  }
-  // aI for align-items: flex-start | flex-end | center | baseline | stretch;
-  &.aI {
-    // flex-start: cross-start margin edge of the items is placed on the cross-start line
-    &_flex-start {
-      align-items: flex-start;
-    }
-    // flex-end: cross-end margin edge of the items is placed on the cross-end line
-    &_flex-end {
-      align-items: flex-end;
-    }
-    // center: items are centered in the cross-axis
-    &_center {
-      align-items: center;
-    }
-    // baseline: items are aligned such as their baselines align
-    &_baseline {
-      align-items: baseline;
-    }
-    // stretch (default): stretch to fill the container (still respect min-width/max-width)
-    &_stretch {
-      align-items: stretch;
-    }
-  }
-  // aC for align-content: flex-start | flex-end | center | space-between | space-around | stretch;
-  &.aC {
-    // flex-start: lines packed to the start of the container
-    &_flex-start {
-      align-content: flex-start;
-    }
-    // flex-end: lines packed to the end of the container
-    &_flex-end {
-      align-content: flex-end;
-    }
-    // center: lines packed to the center of the container
-    &_center {
-      align-content: center;
-    }
-    // space-between: lines evenly distributed; the first line is at the start of the container while the last one is at the end
-    &_space-between {
-      align-content: space-between;
-    }
-    // space-around: lines evenly distributed with equal space around each line
-    &_space-around {
-      align-content: space-around;
-    }
-    // stretch (default): lines stretch to take up the remaining space
-    &_stretch {
-      align-content: stretch;
+
+  [class*="#{$GRID_ITEM_SELECTOR_CLASSNAME +'_'}"], #{$GRID_ITEM_SELECTOR} {
+    &.align{
+      &_self-start{
+        align-self: flex-start!important;
+      }
+      &_self-center{
+        align-self: center!important;
+      }
+      &_self-end{
+        align-self: flex-end!important;
+      }
     }
   }
 }
